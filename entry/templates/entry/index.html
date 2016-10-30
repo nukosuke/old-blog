@@ -1,1 +1,6 @@
 <h1>index</h1>
+<ul>
+{% for entry in entries %}
+  <li><a href="{% url 'entry-show' entry.slug %}">{{ entry.title }}</a> - {{ entry.published_at }}</li>
+{% endfor %}
+</ul>
