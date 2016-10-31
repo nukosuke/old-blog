@@ -1,3 +1,6 @@
+{% extends 'layout/entry.html' %}
+
+{% block content %}
 <h1>index</h1>
 <a href="{% url 'entry-new-edit' %}">new entry</a>
 <ul>
@@ -5,3 +8,4 @@
   <li><a href="{% url 'entry-show' entry.slug %}">{{ entry.title }}</a> - {{ entry.published_at }}</li>
 {% endfor %}
 </ul>
+{% endblock %}
