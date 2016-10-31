@@ -1,6 +1,9 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
+from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from .models import Entry
+from .forms import EntryForm
 
 def index(request):
     #TODO: make 5 to parameter
@@ -13,10 +16,32 @@ def show(request, slug):
     return render(request, 'entry/show.html', {'entry': entry})
 
 @login_required
+def new_edit(request):
+    entry = Entry()
+    form = EntryForm()
+    return render(request, 'entry/new_edit.html', {'entry': entry, 'form': form})
+
+@login_required
 def edit(request, entry_id):
     entry = get_object_or_404(Entry, pk=entry_id)
-    return render(request, 'entry/edit.html', {'entry': entry})
+    form = EntryForm(instance=entry)
+    return render(request, 'entry/edit.html', {'entry': entry, 'form': form})
 
 @login_required
 def new(request):
-    return #TODO:redirect
+    entry_form = EntryForm(request.POST)
+    entry = entry_form.save()
+    return HttpResponseRedirect(reverse('entry-show', args=[entry.slug]))
+
+@login_required
+def update(request, entry_id):
+    entry = Entry.objects.get(pk=entry_id)
+    entry_form = EntryForm(request.POST, instance=entry)
+    entry_form.save()
+    return HttpResponseRedirect(reverse('entry-show', args=[entry.slug]))
+
+@login_required
+def delete(request, entry_id):
+    entry = Entry.objects.get(pk=entry_id)
+    entry.delete()
+    return HttpResponseRedirect(reverse('entry-index'))
