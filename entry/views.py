@@ -22,8 +22,8 @@ def new_edit(request):
     return render(request, 'entry/new_edit.html', {'entry': entry, 'form': form})
 
 @login_required
-def edit(request, entry_id):
-    entry = get_object_or_404(Entry, pk=entry_id)
+def edit(request, slug):
+    entry = get_object_or_404(Entry, slug=slug)
     form = EntryForm(instance=entry)
     return render(request, 'entry/edit.html', {'entry': entry, 'form': form})
 

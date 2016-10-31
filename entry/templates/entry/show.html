@@ -1,6 +1,7 @@
 {% extends 'layout/base.html' %}
 
 {% block content %}
-<h1>{{ entry.title }}</h1>
-{{ entry.body }}
+<a href="{% url 'entry-index' %}">return to list</a>
+<h1>{{ entry.title }}</h1><a href="{% url 'entry-edit' entry.slug %}">edit</a>
+<p>{{ entry.body }}</p>
 {% endblock %}
