@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/nukosuke/blog.svg?branch=master)](https://travis-ci.org/nukosuke/blog)
+
 # blog
 
 blog engine powered by Django
