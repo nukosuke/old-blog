@@ -2,7 +2,9 @@
 
 {% block content %}
 <h1>index</h1>
-<a href="{% url 'entry-new-edit' %}">new entry</a>
+{% if user.is_authenticated %}
+  <a href="{% url 'entry-new-edit' %}">new entry</a>
+{% endif %}
 <ul>
 {% for entry in entries %}
   <li><a href="{% url 'entry-show' entry.slug %}">{{ entry.title }}</a> - {{ entry.published_at }}</li>
