@@ -1,4 +1,5 @@
 from django.contrib.syndication.views import Feed
+from django.utils.feedgenerator import Atom1Feed
 from django.urls import reverse
 from .models import Entry
 
@@ -15,3 +16,8 @@ class RssFeed(Feed):
 
     def item_link(self, item):
         return reverse('entry-show', args=[item.slug])
+
+
+class AtomFeed(RssFeed):
+    feed_type = Atom1Feed
+    subtitle = RssFeed.description
