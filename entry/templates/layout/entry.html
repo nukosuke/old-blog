@@ -4,10 +4,11 @@
   <title>{% block title %}entry{% endblock %}</title>
   <link rel="alternate" type="application/rss+xml" href="{{ request.get_host }}{% url 'entry-rss' %}" title="RSS2.0" />
   <link rel="alternate" type="application/atom+xml" href="{{ request.get_host }}{% url 'entry-atom' %}" title="Atom" />
-  {% block pre-script %}{% endblock %}
+  {% block stylesheets %}{% endblock %}
+  {% block pre-scripts %}{% endblock %}
 </head>
 <body>
   {% block content %}{% endblock %}
-  {% block post-script %}{% endblock %}
+  {% block post-scripts %}{% endblock %}
 </body>
 </html>

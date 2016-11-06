@@ -1,11 +1,28 @@
 {% extends 'layout/entry.html' %}
+{% load static %}
+{% load md2html %}
+
+{% block title %}{{ entry.title }}{% endblock %}
+
+{% block stylesheets %}
+  <link rel='stylesheet' type='text/css' href="{% static 'stylesheets/highlight.css' %}"/>
+{% endblock %}
+
+{% block pre-scripts %}
+  <script src=''></script>
+{% endblock %}
 
 {% block content %}
-<a href="{% url 'entry-index' %}">return to list</a>
-<h1>{{ entry.title }}</h1>
-{% if user.is_authenticated %}
-  <a href="{% url 'entry-edit' entry.slug %}">edit</a>
-{% endif %}
-<p>{{ entry.body }}</p>
-{% include 'include/disqus.html' %}
+  <a href="{% url 'entry-index' %}">return to list</a>
+  <h1>{{ entry.title }}</h1>
+
+  {% if user.is_authenticated %}
+    <a href="{% url 'entry-edit' entry.slug %}">edit</a>
+  {% endif %}
+
+  {% autoescape off %}
+    {{ entry.body|md2html }}
+  {% endautoescape %}
+
+  {% include 'include/disqus.html' %}
 {% endblock %}
