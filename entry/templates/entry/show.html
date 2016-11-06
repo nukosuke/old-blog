@@ -13,16 +13,25 @@
 {% endblock %}
 
 {% block content %}
-  <a href="{% url 'entry-index' %}">return to list</a>
-  <h1>{{ entry.title }}</h1>
+  <ul class="uk-breadcrumb">
+    <li><a href="{% url 'entry-index' %}">index</a></li>
+    <li><span>{{ entry.slug }}</span></li>
+  </ul>
 
-  {% if user.is_authenticated %}
-    <a href="{% url 'entry-edit' entry.slug %}">edit</a>
-  {% endif %}
-
-  {% autoescape off %}
-    {{ entry.body|md2html }}
-  {% endautoescape %}
-
-  {% include 'include/disqus.html' %}
+  <article class="uk-article">
+    <h1 class="uk-article-title">
+      {{ entry.title }}
+      {% if user.is_authenticated %}
+        <span style="font-size: 16pt; color: #999;">
+          <a href="{% url 'entry-edit' entry.slug %}" class="uk-icon-hover uk-icon-pencil"></a>
+        </span>
+      {% endif %}
+    </h1>
+    <p class="uk-article-meta">{{ entry.published_at }}</p>
+    {% autoescape off %}
+      {{ entry.body|md2html }}
+    {% endautoescape %}
+    <hr class="uk-article-divider">
+    {% include 'include/disqus.html' %}
+  </article>
 {% endblock %}

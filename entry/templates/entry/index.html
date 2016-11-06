@@ -1,13 +1,15 @@
 {% extends 'layout/entry.html' %}
 
 {% block content %}
-<h1>index</h1>
-{% if user.is_authenticated %}
-  <a href="{% url 'entry-new-edit' %}">new entry</a>
-{% endif %}
-<ul>
-{% for entry in entries %}
-  <li><a href="{% url 'entry-show' entry.slug %}">{{ entry.title }}</a> - {{ entry.published_at }}</li>
-{% endfor %}
-</ul>
+  <h1>index</h1>
+  {% if user.is_authenticated %}
+    <a href="{% url 'entry-new-edit' %}">new entry</a>
+  {% endif %}
+
+  {% for entry in entries %}
+    <a class="uk-panel uk-panel-hover" href="{% url 'entry-show' entry.slug %}">
+      <h3 class="uk-panel-title">{{ entry.title }}</h3>
+      {{ entry.published_at|date:"Y-m-d" }}
+    </a>
+  {% endfor %}
 {% endblock %}
