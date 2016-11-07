@@ -1,14 +1,21 @@
 {% extends 'layout/entry.html' %}
 
 {% block content %}
-  <h1>index</h1>
-  {% if user.is_authenticated %}
-    <a href="{% url 'entry-new-edit' %}">new entry</a>
-  {% endif %}
+  <div class="uk-clearfix">
+    <h1 class="uk-float-left">index /</h1>
+    <ul class="uk-float-right uk-subnav uk-subnav-line">
+      <li><a href="{% url 'entry-rss' %}"><i class="uk-icon-rss-square"></i> RSS 2.0</a></li>
+      <li><a href="https://bitbucket.org/nukosuke/blog"><i class="uk-icon-bitbucket"></i> Fork</a></li>
+      {% if user.is_authenticated %}
+      <li><a href="{% url 'entry-new-edit' %}"><i class="uk-icon-edit"></i> New Entry</a></li>
+      <li><a href="{% url 'logout' %}"><i class="uk-icon-power-off"></i> Logout</a></li>
+      {% endif %}
+    </ul>
+  </div>
 
   {% for entry in entries %}
     <a class="uk-panel uk-panel-hover" href="{% url 'entry-show' entry.slug %}">
-      <h3 class="uk-panel-title">{{ entry.title }}</h3>
+      <h3 class="uk-panel-title"><i class="uk-icon-file-text-o"></i> {{ entry.title }}</h3>
       {{ entry.published_at|date:"Y-m-d" }}
     </a>
   {% endfor %}
