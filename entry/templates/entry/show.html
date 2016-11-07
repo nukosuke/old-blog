@@ -13,10 +13,20 @@
 {% endblock %}
 
 {% block content %}
-  <ul class="uk-breadcrumb">
-    <li><a href="{% url 'entry-index' %}">index</a></li>
-    <li><span>{{ entry.slug }}</span></li>
-  </ul>
+  <div class="uk-clearfix">
+    <ul class="uk-breadcrumb uk-float-left">
+      <li><a href="{% url 'entry-index' %}">index</a></li>
+      <li><span>{{ entry.slug }}</span></li>
+    </ul>
+    <ul class="uk-float-right uk-subnav uk-subnav-line">
+      <li><a href="{% url 'entry-rss' %}"><i class="uk-icon-rss-square"></i> RSS 2.0</a></li>
+      <li><a href="https://bitbucket.org/nukosuke/blog"><i class="uk-icon-bitbucket"></i> Fork</a></li>
+      {% if user.is_authenticated %}
+      <li><a href="{% url 'entry-new-edit' %}"><i class="uk-icon-edit"></i> New Entry</a></li>
+      <li><a href="{% url 'logout' %}"><i class="uk-icon-power-off"></i> Logout</a></li>
+      {% endif %}
+    </ul>
+  </div>
 
   <article class="uk-article">
     <h1 class="uk-article-title">
