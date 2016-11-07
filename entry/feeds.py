@@ -14,6 +14,9 @@ class RssFeed(Feed):
     def item_title(self, item):
         return item.title
 
+    def item_description(self, item):
+        return item.body
+
     def item_link(self, item):
         return reverse('entry-show', args=[item.slug])
 
