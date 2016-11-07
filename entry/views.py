@@ -5,15 +5,18 @@ from django.contrib.auth.decorators import login_required
 from .models import Entry
 from .forms import EntryForm
 
+from django.conf import settings
+TOP_BANNER = settings.TOP_BANNER
+
 def index(request):
     #TODO: make 5 to parameter
     """Return the last 5 published entries."""
     entries = Entry.objects.order_by('-published_at')[:5]
-    return render(request, 'entry/index.html', {'entries': entries})
+    return render(request, 'entry/index.html', {'TOP_BANNER': TOP_BANNER, 'entries': entries})
 
 def show(request, slug):
     entry = get_object_or_404(Entry, slug=slug)
-    return render(request, 'entry/show.html', {'entry': entry})
+    return render(request, 'entry/show.html', {'TOP_BANNER': TOP_BANNER, 'entry': entry})
 
 @login_required
 def new_edit(request):

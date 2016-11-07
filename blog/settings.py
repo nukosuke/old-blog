@@ -126,3 +126,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = 'static'
+
+from pyfiglet import Figlet
+TOP_BANNER = Figlet(font='big', width=100).renderText('nukosuke.com')
