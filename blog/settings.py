@@ -20,12 +20,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'g)g55$om)o*gdj046$4j@(u*=_2_p)t_g3n%ngrw6#pq%byq&-'
+SECRET_KEY = os.environ.get('SECRET_KEY', '$secret_key$')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = bool(os.environ.get('DEBUG', False))
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split()
 
 
 # Application definition
@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'blog.apps.BlogConfig',
     'accounts.apps.AccountsConfig',
     'entry.apps.EntryConfig',
 ]
@@ -125,3 +126,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = 'static'
+
+from pyfiglet import Figlet
+TOP_BANNER = Figlet(font='big', width=100).renderText('nukosuke.com')

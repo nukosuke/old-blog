@@ -4,10 +4,25 @@
   <title>{% block title %}entry{% endblock %}</title>
   <link rel="alternate" type="application/rss+xml" href="{{ request.get_host }}{% url 'entry-rss' %}" title="RSS2.0" />
   <link rel="alternate" type="application/atom+xml" href="{{ request.get_host }}{% url 'entry-atom' %}" title="Atom" />
-  {% block pre-script %}{% endblock %}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/2.27.2/css/uikit.min.css" />
+  {% block stylesheets %}{% endblock %}
+  {% block pre-scripts %}{% endblock %}
 </head>
 <body>
-  {% block content %}{% endblock %}
-  {% block post-script %}{% endblock %}
+
+  <div class="uk-container-center">
+  <pre>{{ TOP_BANNER }}</pre>
+  </div>
+
+  <div class="uk-container uk-container-center">
+    {% block content %}{% endblock %}
+  </div>
+
+  <script
+    src="https://code.jquery.com/jquery-3.1.1.min.js"
+    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/2.27.2/js/uikit.min.js"></script>
+  {% block post-scripts %}{% endblock %}
 </body>
 </html>
