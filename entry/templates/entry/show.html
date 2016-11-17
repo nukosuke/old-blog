@@ -19,6 +19,7 @@
       <li><span>{{ entry.slug }}</span></li>
     </ul>
     <ul class="uk-float-right uk-subnav uk-subnav-line">
+      <li><a href="?format=slide"><i class="uk-icon-desktop"></i> Slide Mode</a></li>
       <li><a href="{% url 'entry-rss' %}"><i class="uk-icon-rss-square"></i> RSS 2.0</a></li>
       <li><a href="https://bitbucket.org/nukosuke/blog"><i class="uk-icon-bitbucket"></i> Fork</a></li>
       {% if user.is_authenticated %}

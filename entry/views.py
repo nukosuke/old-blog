@@ -16,7 +16,10 @@ def index(request):
 
 def show(request, slug):
     entry = get_object_or_404(Entry, slug=slug)
-    return render(request, 'entry/show.html', {'TOP_BANNER': TOP_BANNER, 'entry': entry})
+    if request.GET.get('format') == 'slide':
+        return render(request, 'entry/show-slide.html', {'entry': entry})
+    else:
+        return render(request, 'entry/show.html', {'TOP_BANNER': TOP_BANNER, 'entry': entry})
 
 @login_required
 def new_edit(request):
