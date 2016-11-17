@@ -1,0 +1,13 @@
+{% extends 'layout/slide.html' %}
+{% load md2html %}
+
+{% block title %}{{ entry.title }}{% endblock %}
+
+{% block content %}
+## {{ entry.title }}
+{{ entry.published_at|date:"Y/m/d" }}
+
+
+
+{{ entry.body|truncate_meta }}
+{% endblock %}
