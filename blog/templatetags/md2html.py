@@ -4,7 +4,7 @@ import markdown
 from mdx_gfm import GithubFlavoredMarkdownExtension as gfm
 
 register = template.Library()
-md = markdown.Markdown(extensions=[gfm()])
+md = markdown.Markdown(extensions=[gfm(), 'markdown.extensions.meta'])
 
 @register.filter
 @stringfilter
