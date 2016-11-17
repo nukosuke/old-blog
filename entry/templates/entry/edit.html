@@ -1,10 +1,15 @@
 {% extends 'layout/entry.html' %}
+{% load static %}
+
+{% block stylesheets %}
+  <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/entry/editor-form.css' %}" />
+{% endblock %}
 
 {% block content %}
-<h1>edit</h1>
 <form action="{% url 'entry-update' entry.id %}" method="POST">
   {% csrf_token %}
   {{ form }}
-  <input type="submit" value="submit" />
+  <input type="submit" class="uk-button uk-button-primary" value="Post" />
+  <a href="{% url 'entry-show' entry.slug %}" class="uk-button uk-button-link">Cancel</a>
 </form>
 {% endblock %}
